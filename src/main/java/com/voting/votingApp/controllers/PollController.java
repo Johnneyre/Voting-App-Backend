@@ -1,6 +1,7 @@
 package com.voting.votingApp.controllers;
 
 import com.voting.votingApp.model.Poll;
+import com.voting.votingApp.request.Vote;
 import com.voting.votingApp.services.PollServices;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,11 @@ public class PollController {
     @PostMapping
     public Poll createPoll(@Valid @RequestBody Poll poll) {
         return pollServices.createPoll(poll);
+    }
+
+    @PostMapping("/vote")
+    public void vote(@RequestBody Vote vote) {
+        pollServices.vote(vote.getPollId(), vote.getOptionIndex());
     }
 }
 
